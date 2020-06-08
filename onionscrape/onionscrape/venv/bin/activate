@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/donkeywrong/onionscrape/onionscrape/venv"
+VIRTUAL_ENV="/home/donkeywrong/Documents/git/is-it-the-onion/onionscrape/onionscrape/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
