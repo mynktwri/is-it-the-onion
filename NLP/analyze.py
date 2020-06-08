@@ -11,8 +11,9 @@ def parse(text):
     doc = nlp(text)
     parse_list = []
     for t in doc:
-        row = [t.text, t.lemma_, t.pos_, spacy.explain(t.pos_), t.is_stop]
+        row = [t.text, t.pos_, t.is_stop]
         parse_list.append(row)
+    pd.DataFrame(parse_list)
     return parse_list
 
 # Load English tokenizer, tagger, parser, NER and word vectors
