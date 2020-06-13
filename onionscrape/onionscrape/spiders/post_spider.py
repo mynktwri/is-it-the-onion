@@ -9,12 +9,14 @@ class PostsSpider(scrapy.Spider):
 
     def parse(self, response):
         for post in response.css('article.cw4lnv-0.iTueKC.js_post_item'):
-            yield{
-                'title': post.css('.cw4lnv-5.aoiLP a h2::text')[0].get(),
-                'category' : post.css('.vxl3c2-0.eYptU::text').get(),
-                'date': post.css('.sc-3nbvzd-1.kpXIm::text')[0].get(),
-                'time': post.css('.sc-3nbvzd-1.kpXIm::text')[1].get()
-            }
+            category = post.css('.vxl3c2-0.eYptU::text').get()
+            if category not in ['American Voices', 'Infographic', 'Slideshow', 'Entertainment', 'Editorial Cartoon'] and category is not None:
+                yield{
+                    'title': post.css('.cw4lnv-5.aoiLP a h2::text')[0].get(),
+                    'category' : post.css('.vxl3c2-0.eYptU::text').get(),
+                    'date': post.css('.sc-3nbvzd-1.kpXIm::text')[0].get(),
+                    'time': post.css('.sc-3nbvzd-1.kpXIm::text')[1].get()
+                }
         next_page = response.css('div.row a::attr(href)').get()
         if next_page is not None:
             next_page = 'https://www.theonion.com/latest' + next_page
