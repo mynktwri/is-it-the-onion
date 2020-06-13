@@ -1,4 +1,9 @@
-from recordCSV import save_data
 from recordCSV import pull_data
+import pandas as pd
 
-pull_data("../data/test.csv")
+a = pd.DataFrame()
+print(a.shape)
+
+a = pull_data("../data/test.csv")
+print(a.shape)
+

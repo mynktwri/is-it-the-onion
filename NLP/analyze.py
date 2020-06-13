@@ -1,19 +1,22 @@
 import spacy
 import pandas as pd
+import numpy as np
 
 spacy.prefer_gpu()
-nlp = spacy.load("en_core_web_sm")
-
+nlp = spacy.load("en_core_web_md") # large spacy word base
 
 # "text", "POS", "stopword" are parsed for now
+# param text is a whole sentence as a string
 def parse(text):
     doc = nlp(text)
-    parse_list = []
+    parse_list = pd.DataFrame()
     for t in doc:
-        row = [t.text, convert_pos(t.pos_), convert_stop(t.is_stop)]
-        parse_list.append(row)
-    pd.DataFrame(parse_list)
-    return parse_list
+        wordvec = pd.Series(t.vector)
+        wordvec = wordvec.append(pd.Series(convert_pos(t.pos_)), ignore_index=True)
+        parse_list = parse_list.append(wordvec, ignore_index=True) #one word's vector representation and POS
+    print(parse_list.to_numpy(dtype='float16', copy=True))
+    return parse_list.to_numpy(dtype='float16', copy=True)
+    # returnes one sentence at a time as a numpy array - vector representation, POS
 
 
 def convert_pos(pos):
