@@ -13,7 +13,7 @@ class PostsSpider(scrapy.Spider):
             newtitle = post.css('.cw4lnv-5.aoiLP a h2::text')[0].get()
             if category not in ['American Voices', 'Infographic', 'Slideshow', 'Entertainment', 'Editorial Cartoon'] and category is not None:
                 yield{
-                    'title': post.css('.cw4lnv-5.aoiLP a h2::text')[0].get().strip('"'),
+                    'title': post.css('.cw4lnv-5.aoiLP a h2::text')[0].get().replace('"', ""),
                     'category' : post.css('.vxl3c2-0.eYptU::text').get(),
                     'date': post.css('.sc-3nbvzd-1.kpXIm::text')[0].get(),
                     'time': post.css('.sc-3nbvzd-1.kpXIm::text')[1].get()
