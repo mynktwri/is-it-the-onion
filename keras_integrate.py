@@ -21,7 +21,6 @@ print(data.head())
 
 
 
-
 #set embedding_dim to 50 to start
 #nonzero_elements = np.count_nonzero(np.count_nonzero(embedding_matrix, axis=1))
 #nonzero_elements / vocab_size
