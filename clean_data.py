@@ -16,13 +16,17 @@ post_title_not_onion.to_csv("notonion_clean.csv")
 
 data = pd.read_csv("data/posts.csv")
 print(data.head())
-data_too = []
+# data = data[:1000]
+data_too = pd.DataFrame()
+temp = []
 for index, row in data.iterrows():
-    if i['category'] not in ['American Voices', 'Infographic', 'Slideshow', 'Entertainment',
-                    'Editorial Cartoon'] and i['category'] is not None:
-        data_too = data_too.append(i)
-post_title_onion = pd.DataFrame(data_too[['title']])
+    if row['category'] not in ['American Voices', 'Infographic', 'Slideshow', 'Entertainment',
+                    'Editorial Cartoon'] and row['category'] is not None:
+            temp.append(data.iloc[index])
+data_too = data_too.append(temp, ignore_index=True)
+post_title_onion = data_too.reset_index(drop=True)
 post_title_onion["onion"] = 1
+post_title_onion.drop(columns=['category', 'date', 'time'], inplace=True)
 print(post_title_onion.head())
 post_title_onion.to_csv("data/posts_clean.csv")
 #ignore no category,  american voices, infographic, slideshow,
