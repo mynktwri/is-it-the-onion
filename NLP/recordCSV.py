@@ -12,6 +12,7 @@ def pull_data(filename):
     for title in headlines:
         print(title)
         parsed_titles.append(parse(title)) #appends one sentence at a time
+
     # print(parsed_titles)
     pdf = pd.DataFrame(parsed_titles) #convert list into df
     pdf["onion"] = onions[0]
