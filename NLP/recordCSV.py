@@ -14,20 +14,8 @@ def pull_data(filename):
     headlines = f["title"]
     parsed_titles = []
     for title in headlines:
+        print(title)
         parsed_titles.append(save_data(title))
 
     pdf = pd.DataFrame(parsed_titles)
     pdf.to_csv("allData.csv")
-
-    for x in parsed_titles:
-        print("================")
-        print(x)
-
-    #
-    #
-    #
-    #
-    # list_of_titles = f[["title"]]
-    # for fks in list_of_titles:
-    #     print(fks)
-    #
